@@ -1,0 +1,11 @@
+﻿La génération a démarré 07/10/2016 18:01:09.
+     1>Projet "Z:\IMAGRV\OSG\OSG_TP1\OSG_TP1\OSG_TP1.vcxproj" sur le nœud 2 (Build cible(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Dev\OSG-3.2.1\VS2012\x86\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\TP_OSG.cpp
+         TP_OSG.cpp
+     1>z:\imagrv\osg\osg_tp1\tp_osg.cpp(123): error C2664: 'osg::LightSource::setStateSetModes' : impossible de convertir le paramètre 1 de 'osg::StateSet *' en 'osg::StateSet &'
+     1>Génération du projet "Z:\IMAGRV\OSG\OSG_TP1\OSG_TP1\OSG_TP1.vcxproj" terminée (Build cible(s)) -- ÉCHEC.
+
+ÉCHEC de la build.
+
+Temps écoulé 00:00:03.41
