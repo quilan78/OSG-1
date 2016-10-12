@@ -1,4 +1,4 @@
-﻿La génération a démarré 12/10/2016 09:54:10.
+﻿La génération a démarré 12/10/2016 16:57:58.
      1>Projet "Z:\IMAGRV\OSG\OSG_TP1\OSG_TP1\OSG_TP1.vcxproj" sur le nœud 2 (Build cible(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Dev\OSG-3.2.1\VS2012\x86\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\TP_OSG.cpp
@@ -10,4 +10,4 @@
 
 La génération a réussi.
 
-Temps écoulé 00:00:09.56
+Temps écoulé 00:00:09.57

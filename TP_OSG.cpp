@@ -7,6 +7,7 @@
 #include <osg/MatrixTransform>
 #include <osg/Geometry>
 #include <osgDB/ReadFile>
+#include <osg/fog>
 // Keyboard input
 #include <osgViewer/ViewerEventHandlers>
 #include <osgGA/StateSetManipulator>
@@ -84,7 +85,7 @@ int main()
 	terrainScaleMatrix.makeScale(osg::Vec3f(0.1,0.1,0.1));
 
 	//Loading the terrain node
-	osg::ref_ptr<osg::Node> terrainnode (osgDB::readNodeFile("Terrain2.3ds"));
+	osg::ref_ptr<osg::Node> terrainnode (osgDB::readNodeFile("scene.3ds"));
 
 	//Set transformation node parameters
 	terrainScaleMAT->addChild(terrainnode);
@@ -92,9 +93,6 @@ int main()
 
 /* TEXTURES */
 	
-	//Getting the state set of the geode
-	//osg::ref_ptr<osg::StateSet> textureNodeStateSet (terrainnode->getOrCreateStateSet() );
-
 	//Loading texture image object
 	osg::ref_ptr<osg::Image> image (osgDB::readImageFile("wood.png"));
 
@@ -108,7 +106,6 @@ int main()
 	//Create nodes
 
 	osg::ref_ptr<osg::Group> lightGroup1 (new osg::Group);
-	osg::ref_ptr<osg::Group> lightGroup2 (new osg::Group);
 	osg::ref_ptr<osg::LightSource> lightSource1 = new osg::LightSource;
 	osg::ref_ptr<osg::LightSource> lightSource2 = new osg::LightSource;
 
@@ -138,20 +135,18 @@ int main()
 
 	//Add to light source group
 	lightGroup1->addChild(lightSource1.get());
-	lightGroup2->addChild(lightSource2.get());
+	lightGroup1->addChild(lightSource2.get());
 
 	//Light markers: small spheres
    	osg::ref_ptr<osg::Geode> marker1 (new osg::Geode);
 	osg::ref_ptr<osg::Sphere> sphereMarker1 (new osg::Sphere(osg::Vec3f(-5,-5,0),0.5));
 	osg::ref_ptr<osg::ShapeDrawable> sphereDrawableMarker1 (new osg::ShapeDrawable(sphereMarker1.get()));
 	marker1->addDrawable(sphereDrawableMarker1.get());
-	root->addChild(marker1.get());
 
    	osg::ref_ptr<osg::Geode> marker2 (new osg::Geode);
 	osg::ref_ptr<osg::Sphere> sphereMarker2 (new osg::Sphere(osg::Vec3f(5,5,0),0.5));
 	osg::ref_ptr<osg::ShapeDrawable> sphereDrawableMarker2 (new osg::ShapeDrawable(sphereMarker2.get()));
 	marker2->addDrawable(sphereDrawableMarker2.get());
-	root->addChild(marker2.get());
 	
 	// Allumage des lumières
 	rootStateSet->setMode(GL_LIGHT0, osg::StateAttribute::ON);
@@ -179,8 +174,9 @@ int main()
 	root->addChild(myTransform3.get());
 	root->addChild(myTransform4.get());
 	root->addChild(lightGroup1.get());
-	root->addChild(lightGroup2.get());
 	root->addChild(myTransform5.get());
+	root->addChild(marker1.get());
+	root->addChild(marker2.get());
 
 	// Add the geode to the transforms
 	myTransform1->addChild(myshapegeode1);
@@ -192,6 +188,19 @@ int main()
 
 	// Set the scene data
 	viewer.setSceneData( root.get() ); 
+
+/* Brouillard */
+
+	osg::ref_ptr<osg::Fog> fog ( new osg::Fog );
+	fog->setMode(osg::Fog::LINEAR);
+	fog->setColor(osg::Vec4(0,1,0,0));
+	fog->setDensity(10);
+	fog->setStart(0);
+	fog->setEnd(100);
+
+	
+	rootStateSet->setAttributeAndModes(fog);
+
 
 /* KEYBOARD INPUT */
 	
