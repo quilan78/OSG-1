@@ -1,11 +1,13 @@
-﻿La génération a démarré 07/10/2016 18:01:09.
+﻿La génération a démarré 12/10/2016 09:54:10.
      1>Projet "Z:\IMAGRV\OSG\OSG_TP1\OSG_TP1\OSG_TP1.vcxproj" sur le nœud 2 (Build cible(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Dev\OSG-3.2.1\VS2012\x86\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\TP_OSG.cpp
          TP_OSG.cpp
-     1>z:\imagrv\osg\osg_tp1\tp_osg.cpp(123): error C2664: 'osg::LightSource::setStateSetModes' : impossible de convertir le paramètre 1 de 'osg::StateSet *' en 'osg::StateSet &'
-     1>Génération du projet "Z:\IMAGRV\OSG\OSG_TP1\OSG_TP1\OSG_TP1.vcxproj" terminée (Build cible(s)) -- ÉCHEC.
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"Z:\IMAGRV\OSG\OSG_TP1\Debug\OSG_TP1.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Dev\OSG-3.2.1\VS2012\x86\lib" osgd.lib osgDBd.lib osgGAd.lib osgUtild.lib osgViewerd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"Z:\IMAGRV\OSG\OSG_TP1\Debug\OSG_TP1.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"Z:\IMAGRV\OSG\OSG_TP1\Debug\OSG_TP1.lib" /MACHINE:X86 Debug\TP_OSG.obj
+         OSG_TP1.vcxproj -> Z:\IMAGRV\OSG\OSG_TP1\Debug\OSG_TP1.exe
+     1>Génération du projet "Z:\IMAGRV\OSG\OSG_TP1\OSG_TP1\OSG_TP1.vcxproj" terminée (Build cible(s)).
 
-ÉCHEC de la build.
+La génération a réussi.
 
-Temps écoulé 00:00:03.41
+Temps écoulé 00:00:09.56

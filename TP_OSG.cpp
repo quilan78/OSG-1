@@ -23,6 +23,9 @@ int main()
 
 	//Creating the root node
 	osg::ref_ptr<osg::Group> root (new osg::Group);
+
+	// StateSet de root
+	osg::ref_ptr<osg::StateSet> rootStateSet ( root->getOrCreateStateSet() );
 	
 	//The geode containing our shape
    	osg::ref_ptr<osg::Geode> myshapegeode1 (new osg::Geode);
@@ -104,28 +107,55 @@ int main()
 /* LIGHTING */
 	//Create nodes
 
-	osg::ref_ptr<osg::Group> lightGroup (new osg::Group);
+	osg::ref_ptr<osg::Group> lightGroup1 (new osg::Group);
+	osg::ref_ptr<osg::Group> lightGroup2 (new osg::Group);
 	osg::ref_ptr<osg::LightSource> lightSource1 = new osg::LightSource;
-	
-	osg::ref_ptr<osg::StateSet> lightSS (new osg::StateSet);
+	osg::ref_ptr<osg::LightSource> lightSource2 = new osg::LightSource;
 
 	//Create a local light
-	osg::Vec4f lightPosition(5,-5,0,0);
-	osg::ref_ptr<osg::Light> myLight = new osg::Light;
-	myLight->setLightNum(0);
-	myLight->setPosition(osg::Vec4f(0,0,0,0));
-	myLight->setAmbient(osg::Vec4f(10,0,0,0));
-	myLight->setDiffuse(osg::Vec4f(0,0,0,0));
-	myLight->setConstantAttenuation(0.5);
+	osg::Vec4f lightPosition1(-5,-5,0,0);
+	osg::Vec4f lightPosition2(5,5,0,0);
+
+	osg::ref_ptr<osg::Light> myLight1 = new osg::Light;
+	myLight1->setLightNum(0);
+	myLight1->setPosition(lightPosition1);
+	myLight1->setDiffuse(osg::Vec4f(1,0,0,0));
+	myLight1->setSpecular(osg::Vec4f(1,0,0,0));
+	myLight1->setConstantAttenuation(0.1);
+	
+	osg::ref_ptr<osg::Light> myLight2 = new osg::Light;
+	myLight2->setLightNum(1);
+	myLight2->setPosition(lightPosition2);
+	myLight2->setDiffuse(osg::Vec4f(0,0,1,0));
+	myLight2->setSpecular(osg::Vec4f(0,0,1,0));
+	myLight2->setConstantAttenuation(0.1);
 
 	//Set light source parameters
-	lightSource1->setLight(myLight.get());
-	lightSource1->setStateSetModes(lightSS.get(), osg::StateAttribute::ON);
+	lightSource1->setLight(myLight1.get());
+
+	//Set light source parameters
+	lightSource2->setLight(myLight2.get());
 
 	//Add to light source group
-	lightGroup->addChild(lightSource1.get());
+	lightGroup1->addChild(lightSource1.get());
+	lightGroup2->addChild(lightSource2.get());
+
 	//Light markers: small spheres
+   	osg::ref_ptr<osg::Geode> marker1 (new osg::Geode);
+	osg::ref_ptr<osg::Sphere> sphereMarker1 (new osg::Sphere(osg::Vec3f(-5,-5,0),0.5));
+	osg::ref_ptr<osg::ShapeDrawable> sphereDrawableMarker1 (new osg::ShapeDrawable(sphereMarker1.get()));
+	marker1->addDrawable(sphereDrawableMarker1.get());
+	root->addChild(marker1.get());
+
+   	osg::ref_ptr<osg::Geode> marker2 (new osg::Geode);
+	osg::ref_ptr<osg::Sphere> sphereMarker2 (new osg::Sphere(osg::Vec3f(5,5,0),0.5));
+	osg::ref_ptr<osg::ShapeDrawable> sphereDrawableMarker2 (new osg::ShapeDrawable(sphereMarker2.get()));
+	marker2->addDrawable(sphereDrawableMarker2.get());
+	root->addChild(marker2.get());
 	
+	// Allumage des lumières
+	rootStateSet->setMode(GL_LIGHT0, osg::StateAttribute::ON);
+	rootStateSet->setMode(GL_LIGHT1, osg::StateAttribute::ON);
 /* SCENE GRAPH*/
 
 	// Add the shape drawable to the geode
@@ -148,6 +178,8 @@ int main()
 	root->addChild(myTransform2.get());
 	root->addChild(myTransform3.get());
 	root->addChild(myTransform4.get());
+	root->addChild(lightGroup1.get());
+	root->addChild(lightGroup2.get());
 	root->addChild(myTransform5.get());
 
 	// Add the geode to the transforms
@@ -188,15 +220,15 @@ int main()
 	material1->setShininess(osg::Material::Face::FRONT_AND_BACK, 0);
 
 	//Setting material 2 - cylindre
-	material2->setAmbient(osg::Material::Face::FRONT_AND_BACK,osg::Vec4(0,0,5,0)); // entre 0 et 10
-	material2->setDiffuse(osg::Material::Face::FRONT_AND_BACK,osg::Vec4(0,0,0,0)); // entre 0 et 1
-	material2->setSpecular(osg::Material::Face::FRONT_AND_BACK,osg::Vec4(0,1,0,0)); // entre 0 et 1
+	material2->setAmbient(osg::Material::Face::FRONT_AND_BACK,osg::Vec4(0,7,0,0)); // entre 0 et 10
+	material2->setDiffuse(osg::Material::Face::FRONT_AND_BACK,osg::Vec4(0,0,0.8,0)); // entre 0 et 1
+	material2->setSpecular(osg::Material::Face::FRONT_AND_BACK,osg::Vec4(1,0,0,0)); // entre 0 et 1
 	material2->setEmission(osg::Material::Face::FRONT_AND_BACK,osg::Vec4(0,0,0,0)); // entre 0 et 1
-	material2->setShininess(osg::Material::Face::FRONT_AND_BACK,100); // entre 0 et 128
+	material2->setShininess(osg::Material::Face::FRONT_AND_BACK,50); // entre 0 et 128
 
 	//Setting material 3 - sphere
 	material3->setAmbient(osg::Material::Face::FRONT_AND_BACK,osg::Vec4(0,0,7,0));
-	material3->setDiffuse(osg::Material::Face::FRONT_AND_BACK,osg::Vec4(0.4,0,0,0));
+	material3->setDiffuse(osg::Material::Face::FRONT_AND_BACK,osg::Vec4(0.4,0.4,0.4,0));
 	material3->setSpecular(osg::Material::Face::FRONT_AND_BACK,osg::Vec4(0,0,1,0));
 	material3->setEmission(osg::Material::Face::FRONT_AND_BACK,osg::Vec4(0,0,0,0));
 	material3->setShininess(osg::Material::Face::FRONT_AND_BACK, 128);
@@ -204,7 +236,7 @@ int main()
 	//Setting material 4 - cone
 	material4->setAmbient(osg::Material::Face::FRONT_AND_BACK,osg::Vec4(0,0,0.3,0));
 	material4->setDiffuse(osg::Material::Face::FRONT_AND_BACK,osg::Vec4(1,0,0,0));
-	material4->setSpecular(osg::Material::Face::FRONT_AND_BACK,osg::Vec4(0,0.2,0,0));
+	material4->setSpecular(osg::Material::Face::FRONT_AND_BACK,osg::Vec4(0,0,0.2,0));
 	material4->setEmission(osg::Material::Face::FRONT_AND_BACK,osg::Vec4(0,0,0,0));
 	material4->setShininess(osg::Material::Face::FRONT_AND_BACK, 0);
 
