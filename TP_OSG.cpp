@@ -28,7 +28,7 @@ int main()
 	// StateSet de root
 	osg::ref_ptr<osg::StateSet> rootStateSet ( root->getOrCreateStateSet() );
 	
-	//The geode containing our shape
+	//The geode containing our shapte
    	osg::ref_ptr<osg::Geode> myshapegeode1 (new osg::Geode);
    	osg::ref_ptr<osg::Geode> myshapegeode2 (new osg::Geode);
    	osg::ref_ptr<osg::Geode> myshapegeode3 (new osg::Geode);
